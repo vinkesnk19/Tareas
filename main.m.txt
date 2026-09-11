@@ -1,0 +1,46 @@
+clear all
+close all
+clc
+
+DibujaEjes(10);
+
+[Ancho,Largo,Alto] = LeerDimensiones();
+
+
+PointMatrix = GetPointMatrix(Largo,Ancho,Alto,0,0,0);
+
+DibujaCaja(PointMatrix,'black');
+
+
+fprintf('\n¿Cómo quieres mover el cubo?\n');
+fprintf('1. Traslación\n');
+fprintf('2. Rotación\n');
+
+opcion = input('Selecciona una opción: ');
+
+switch opcion
+
+    case 1
+        fprintf('\n--- TRASLACIÓN ---\n');
+
+        dx = input('Introduce el desplazamiento en X [m]: ');
+        dy = input('Introduce el desplazamiento en Y [m]: ');
+        dz = input('Introduce el desplazamiento en Z [m]: ');
+
+        newPoints = TrasladarCaja(dx,dy,dz,PointMatrix);
+
+        DibujaCaja(newPoints,'magenta');
+
+    case 2
+        fprintf('\n--- ROTACIÓN ---\n');
+
+        theta = input('Indica el ángulo de rotación [rad]: ');
+
+        newPoints = MoverCaja(theta,PointMatrix);
+
+        DibujaCaja(newPoints,'cyan');
+
+    otherwise
+        fprintf('\nOpción no válida.\n');
+
+end
